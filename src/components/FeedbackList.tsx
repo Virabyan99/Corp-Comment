@@ -1,27 +1,28 @@
 import FeedbackItem from './FeedbackItem'
+import Spinner from './Spinner'
+import ErrorM from './ErrorM'
+import { TFeedbackItem } from '../lib/types'
 
-const feedbackItem1 = {
-  upvoteCount: 593,
-  badgeLetter: 'B',
-  companyName: 'ByteGrad',
-  text: ' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias',
-  daysAgo: 5
-}
-const feedbackItem2 = {
-  upvoteCount: 53,
-  badgeLetter: 'S',
-  companyName: 'StartBucks',
-  text: ' Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias',
-  daysAgo: 2
+type FeedbackListProps = {
+  isLoading: boolean,
+  feedbackItems: TFeedbackItem[],
+  errorMessage: string
 }
 
-export default function FeedbackList() {
+export default function FeedbackList({
+  feedbackItems,
+  isLoading,
+  errorMessage,
+}: FeedbackListProps) {
   return (
     <ol className="feedback-list">
-      <FeedbackItem feedbackItem={feedbackItem1} />
-      <FeedbackItem feedbackItem={feedbackItem2} />
-      <FeedbackItem feedbackItem={feedbackItem1} />
-     
+      {isLoading && <Spinner />}
+      {errorMessage && <ErrorM message={errorMessage} />}
+      {feedbackItems.map((feedbackItem) => {
+        return (
+          <FeedbackItem key={feedbackItem.id} feedbackItem={feedbackItem} />
+        )
+      })}
     </ol>
   )
 }

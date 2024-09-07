@@ -1,6 +1,11 @@
 import { TriangleUpIcon } from '@radix-ui/react-icons'
+import { TFeedbackItem } from '../lib/types'
 
-export default function FeedbackItem({ feedbackItem }) {
+
+
+type FeedbackItemProps = { feedbackItem: TFeedbackItem }
+
+export default function FeedbackItem({ feedbackItem }: FeedbackItemProps) {
   return (
     <li className="feedback">
       <button>
@@ -12,9 +17,7 @@ export default function FeedbackItem({ feedbackItem }) {
       </div>
       <div>
         <p>{feedbackItem.companyName}</p>
-        <p>
-         {feedbackItem.text}
-        </p>
+        <p>{feedbackItem.text}</p>
       </div>
       <p>{feedbackItem.daysAgo}d</p>
     </li>
